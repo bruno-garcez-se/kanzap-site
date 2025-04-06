@@ -141,16 +141,9 @@ export default function ReportanaSection() {
         </div>
 
         <div className="flex justify-center">
-          <div className="relative w-full max-w-full overflow-hidden">
-            {/* Indicador de rolagem à esquerda */}
-            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 flex items-center justify-center">
-              <svg className="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </div>
-
-            {/* Container dos ícones com rolagem horizontal */}
-            <div className="flex flex-nowrap gap-2 md:gap-4 mb-8 pb-4 overflow-x-auto scrollbar-hide px-8">
+          <div className="relative w-full max-w-4xl">
+            {/* Container dos ícones centralizado */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8">
               {tools.map((tool, index) => (
                 <div
                   key={index}
@@ -160,46 +153,24 @@ export default function ReportanaSection() {
                     setSelectedTool(index)
                   }}
                 >
-                  <div className={`w-8 h-8 md:w-10 md:h-10 bg-gray-100 rounded-xl flex items-center justify-center mb-1 md:mb-2 transition-all duration-300 ${selectedTool === index ? 'text-[#eb594c]' : 'text-[#213365] group-hover:bg-[#eb594c] group-hover:text-white'}`}>
-                    {React.cloneElement(tool.icon, { className: 'w-4 h-4 md:w-5 md:h-5' })}
+                  <div className={`w-10 h-10 md:w-12 md:h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-2 transition-all duration-300 ${selectedTool === index ? 'text-[#eb594c]' : 'text-[#213365] group-hover:bg-[#eb594c] group-hover:text-white'}`}>
+                    {React.cloneElement(tool.icon, { className: 'w-5 h-5 md:w-6 md:h-6' })}
                   </div>
-                  <h3 className="text-[10px] md:text-xs font-semibold text-[#213365] whitespace-nowrap">{tool.title}</h3>
+                  <h3 className="text-xs md:text-sm font-semibold text-[#213365] whitespace-nowrap">{tool.title}</h3>
                 </div>
               ))}
-            </div>
-
-            {/* Indicador de rolagem à direita */}
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 flex items-center justify-center">
-              <svg className="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
             </div>
           </div>
         </div>
 
         {/* Preview da ferramenta selecionada */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="relative aspect-square max-w-md mx-auto">
-            <Image
-              src={`/tools/${tools[selectedTool].title.toLowerCase().replace(/\s+/g, '-')}.png`}
-              alt={tools[selectedTool].title}
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-          <div className="text-center md:text-left">
-            <h3 className="text-2xl md:text-3xl font-bold text-[#213365] mb-4">
-              {tools[selectedTool].title}
-            </h3>
-            <p className="text-2xl font-semibold text-[#213365]">{tools[selectedTool].description}</p>
-          </div>
-        </div>
-
         <div className="bg-white py-8">
           <div className="container mx-auto px-6">
             <div className="flex flex-col items-center">
               <div className="text-center mb-6">
+                <h3 className="text-2xl md:text-3xl font-bold text-[#eb594c] mb-4">
+                  {tools[selectedTool].title}
+                </h3>
                 <p className="text-2xl font-semibold text-[#213365]">{tools[selectedTool].description}</p>
               </div>
               
@@ -248,6 +219,7 @@ export default function ReportanaSection() {
                   </div>
                 </div>
               </div>
+              
               <div className="text-center">
                 <h3 className="text-3xl font-bold mb-4 text-[#213365]">
                   Comece a usar agora mesmo!
