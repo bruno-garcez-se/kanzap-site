@@ -3,6 +3,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 export default function ReportanaSection() {
   const [selectedTool, setSelectedTool] = useState(0)
@@ -143,7 +146,7 @@ export default function ReportanaSection() {
         <div className="flex justify-center">
           <div className="relative w-full max-w-4xl">
             {/* Container dos ícones centralizado */}
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8">
+            <div className="hidden md:flex flex-wrap justify-center gap-4 md:gap-6 mb-8">
               {tools.map((tool, index) => (
                 <div
                   key={index}
@@ -159,6 +162,52 @@ export default function ReportanaSection() {
                   <span className="text-xs md:text-sm font-medium text-[#213365] mt-2">{tool.title}</span>
                 </div>
               ))}
+            </div>
+
+            {/* Carrossel para mobile */}
+            <div className="md:hidden mb-8">
+              <Slider
+                dots={true}
+                infinite={true}
+                speed={500}
+                slidesToShow={3}
+                slidesToScroll={1}
+                centerMode={true}
+                centerPadding="0"
+                beforeChange={(oldIndex, newIndex) => {
+                  handleInteraction()
+                  setSelectedTool(newIndex)
+                }}
+                responsive={[
+                  {
+                    breakpoint: 640,
+                    settings: {
+                      slidesToShow: 3,
+                      slidesToScroll: 1
+                    }
+                  }
+                ]}
+              >
+                {tools.map((tool, index) => (
+                  <div
+                    key={index}
+                    className="px-2"
+                  >
+                    <div
+                      className={`flex flex-col items-center text-center cursor-pointer group ${selectedTool === index ? 'scale-110' : ''}`}
+                      onClick={() => {
+                        handleInteraction()
+                        setSelectedTool(index)
+                      }}
+                    >
+                      <div className={`w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center transition-all duration-300 ${selectedTool === index ? 'text-[#eb594c]' : 'text-[#213365] group-hover:bg-[#eb594c] group-hover:text-white'}`}>
+                        {React.cloneElement(tool.icon, { className: 'w-5 h-5' })}
+                      </div>
+                      <span className="text-xs font-medium text-[#213365] mt-2">{tool.title}</span>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
             </div>
           </div>
         </div>
