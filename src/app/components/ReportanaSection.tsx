@@ -156,6 +156,7 @@ export default function ReportanaSection() {
                   <div className={`w-10 h-10 md:w-12 md:h-12 bg-gray-100 rounded-xl flex items-center justify-center transition-all duration-300 ${selectedTool === index ? 'text-[#eb594c]' : 'text-[#213365] group-hover:bg-[#eb594c] group-hover:text-white'}`}>
                     {React.cloneElement(tool.icon, { className: 'w-5 h-5 md:w-6 md:h-6' })}
                   </div>
+                  <span className="text-xs md:text-sm font-medium text-[#213365] mt-2">{tool.title}</span>
                 </div>
               ))}
             </div>
