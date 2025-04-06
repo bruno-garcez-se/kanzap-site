@@ -141,22 +141,58 @@ export default function ReportanaSection() {
         </div>
 
         <div className="flex justify-center">
-          <div className="flex flex-nowrap gap-4 mb-8 pb-4">
-            {tools.map((tool, index) => (
-              <div
-                key={index}
-                className={`flex-shrink-0 flex flex-col items-center text-center cursor-pointer group ${selectedTool === index ? 'scale-110' : ''}`}
-                onClick={() => {
-                  handleInteraction()
-                  setSelectedTool(index)
-                }}
-              >
-                <div className={`w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mb-2 transition-all duration-300 ${selectedTool === index ? 'text-[#eb594c]' : 'text-[#213365] group-hover:bg-[#eb594c] group-hover:text-white'}`}>
-                  {React.cloneElement(tool.icon, { className: 'w-5 h-5' })}
+          <div className="relative w-full max-w-full overflow-hidden">
+            {/* Indicador de rolagem à esquerda */}
+            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 flex items-center justify-center">
+              <svg className="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </div>
+
+            {/* Container dos ícones com rolagem horizontal */}
+            <div className="flex flex-nowrap gap-2 md:gap-4 mb-8 pb-4 overflow-x-auto scrollbar-hide px-8">
+              {tools.map((tool, index) => (
+                <div
+                  key={index}
+                  className={`flex-shrink-0 flex flex-col items-center text-center cursor-pointer group ${selectedTool === index ? 'scale-110' : ''}`}
+                  onClick={() => {
+                    handleInteraction()
+                    setSelectedTool(index)
+                  }}
+                >
+                  <div className={`w-8 h-8 md:w-10 md:h-10 bg-gray-100 rounded-xl flex items-center justify-center mb-1 md:mb-2 transition-all duration-300 ${selectedTool === index ? 'text-[#eb594c]' : 'text-[#213365] group-hover:bg-[#eb594c] group-hover:text-white'}`}>
+                    {React.cloneElement(tool.icon, { className: 'w-4 h-4 md:w-5 md:h-5' })}
+                  </div>
+                  <h3 className="text-[10px] md:text-xs font-semibold text-[#213365] whitespace-nowrap">{tool.title}</h3>
                 </div>
-                <h3 className="text-xs font-semibold text-[#213365] whitespace-nowrap">{tool.title}</h3>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Indicador de rolagem à direita */}
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 flex items-center justify-center">
+              <svg className="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        {/* Preview da ferramenta selecionada */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="relative aspect-square max-w-md mx-auto">
+            <Image
+              src={`/tools/${tools[selectedTool].title.toLowerCase().replace(/\s+/g, '-')}.png`}
+              alt={tools[selectedTool].title}
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          <div className="text-center md:text-left">
+            <h3 className="text-2xl md:text-3xl font-bold text-[#213365] mb-4">
+              {tools[selectedTool].title}
+            </h3>
+            <p className="text-2xl font-semibold text-[#213365]">{tools[selectedTool].description}</p>
           </div>
         </div>
 
@@ -186,11 +222,11 @@ export default function ReportanaSection() {
                     className="w-full h-auto"
                   />
                 </div>
-                <div className="absolute -right-20 md:-right-24 bottom-[-10%] w-[240px]">
+                <div className="absolute -right-2 md:-right-24 bottom-[-5%] w-[60px] md:w-[240px]">
                   <div className="relative w-full">
-                    <div className="absolute inset-0 transform scale-90 translate-y-4 bg-gradient-to-b from-black/30 to-transparent blur-xl rounded-[45px]"></div>
-                    <div className="relative w-full aspect-[320/650] bg-white rounded-[45px] border-[10px] border-[#1a1a1a] shadow-2xl overflow-hidden">
-                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[90px] h-[20px] bg-[#1a1a1a] rounded-b-[14px] z-10"></div>
+                    <div className="absolute inset-0 transform scale-90 translate-y-4 bg-gradient-to-b from-black/30 to-transparent blur-xl rounded-[16px] md:rounded-[48px]"></div>
+                    <div className="relative w-full aspect-[320/650] bg-white rounded-[16px] md:rounded-[48px] border-[3px] md:border-[10px] border-[#1a1a1a] shadow-2xl overflow-hidden">
+                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[20px] md:w-[90px] h-[6px] md:h-[20px] bg-[#1a1a1a] rounded-b-[4px] md:rounded-b-[12px] z-10"></div>
                       <div className="w-full h-full bg-white overflow-hidden">
                         <Image
                           src={
