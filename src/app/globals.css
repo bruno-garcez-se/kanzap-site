@@ -42,4 +42,28 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* Estilos do carrossel */
+.slick-slide {
+  padding: 0 8px;
+}
+
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-dots li button:before {
+  color: #213365;
+  opacity: 0.5;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #eb594c;
+  opacity: 1;
+}
+
+.slick-prev,
+.slick-next {
+  display: none !important;
 } 
