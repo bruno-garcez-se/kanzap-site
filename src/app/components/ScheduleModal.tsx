@@ -6,9 +6,11 @@ import { Dialog, Transition } from '@headlessui/react'
 interface ScheduleModalProps {
   isOpen: boolean
   onClose: () => void
+  title?: string
+  description?: string
 }
 
-export default function ScheduleModal({ isOpen, onClose }: ScheduleModalProps) {
+export default function ScheduleModal({ isOpen, onClose, title = "Agendar Demonstração", description = "Agende uma demonstração gratuita e descubra como o Kanzap pode transformar seu atendimento" }: ScheduleModalProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,6 +18,8 @@ export default function ScheduleModal({ isOpen, onClose }: ScheduleModalProps) {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+  const buttonText = title === "Solicitar Proposta" ? "Solicitar Proposta" : "Agendar Demonstração"
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -82,11 +86,11 @@ export default function ScheduleModal({ isOpen, onClose }: ScheduleModalProps) {
                   as="h3"
                   className="text-2xl font-bold text-[#213365] mb-2"
                 >
-                  Agendar Demonstração
+                  {title}
                 </Dialog.Title>
                 <div className="mt-2">
                   <p className="text-gray-600">
-                    Agende uma demonstração gratuita e descubra como o Kanzap pode transformar seu atendimento
+                    {description}
                   </p>
                 </div>
 
@@ -141,13 +145,17 @@ export default function ScheduleModal({ isOpen, onClose }: ScheduleModalProps) {
 
                   {submitStatus === 'error' && (
                     <p className="text-red-500 text-sm">
-                      Ocorreu um erro ao agendar. Por favor, tente novamente.
+                      {title === "Solicitar Proposta" 
+                        ? "Ocorreu um erro ao enviar sua solicitação. Por favor, tente novamente."
+                        : "Ocorreu um erro ao agendar. Por favor, tente novamente."}
                     </p>
                   )}
 
                   {submitStatus === 'success' && (
                     <p className="text-green-500 text-sm">
-                      Demonstração agendada com sucesso! Entraremos em contato em breve.
+                      {title === "Solicitar Proposta"
+                        ? "Solicitação enviada com sucesso! Nossa equipe entrará em contato em breve com sua proposta personalizada."
+                        : "Demonstração agendada com sucesso! Entraremos em contato em breve."}
                     </p>
                   )}
 
@@ -157,7 +165,7 @@ export default function ScheduleModal({ isOpen, onClose }: ScheduleModalProps) {
                       disabled={isSubmitting}
                       className="w-full flex items-center justify-center px-8 py-4 rounded-xl bg-[#213365] text-white font-semibold hover:bg-[#eb594c] transform hover:scale-[1.02] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {isSubmitting ? 'Agendando...' : 'Agendar Demonstração'}
+                      {isSubmitting ? 'Enviando...' : buttonText}
                     </button>
                   </div>
                 </form>

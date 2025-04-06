@@ -18,7 +18,7 @@ export default function FeaturesSection() {
         const currentIndex = categoryKeys.indexOf(activeTab)
         const nextIndex = (currentIndex + 1) % categoryKeys.length
         setActiveTab(categoryKeys[nextIndex])
-      }, 2000) // Alterna a cada 2 segundos
+      }, 10000) // Alterna a cada 10 segundos
     }
 
     return () => {

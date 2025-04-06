@@ -12,6 +12,7 @@ import ScheduleModal from './components/ScheduleModal'
 import CarouselSection from './components/CarouselSection'
 import FAQSection from './components/FAQSection'
 import Footer from './components/Footer'
+import ReportanaSection from './components/ReportanaSection'
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -35,23 +36,18 @@ export default function Home() {
                 Gerencie múltiplos atendimentos pelo WhatsApp de forma profissional e eficiente. Aumente suas vendas e satisfação dos clientes.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link 
-                  href="https://app.kanzap.com.br/#/signup" 
-                  className="bg-[#213365] text-white px-8 py-4 rounded-xl hover:bg-[#eb594c] transition-all duration-300 text-center shadow-lg hover:shadow-xl transform hover:scale-105"
-                >
-                  Teste Grátis por 7 dias
-                </Link>
-                <Link 
-                  href="#precos" 
+                <Link
+                  href="https://api.whatsapp.com/send?phone=5579999018990&text=Olá! Gostaria de falar com um especialista sobre o Kanzap."
+                  target="_blank"
                   className="bg-white text-[#213365] px-8 py-4 rounded-xl hover:bg-[#eb594c] hover:text-white transition-all duration-300 text-center border-2 border-[#213365] hover:border-[#eb594c] transform hover:scale-105"
                 >
-                  Ver Planos
+                  Falar com um especialista
                 </Link>
               </div>
             </div>
             <div className="md:w-1/2 mt-12 md:mt-0 flex justify-center items-center relative">
               <Image
-                src="/hero-social.png.png"
+                src="/hero-nova.png.webp"
                 alt="Kanzap Hero"
                 width={425}
                 height={500}
@@ -63,8 +59,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <FeaturesSection />
+      {/* Reportana Section */}
+      <ReportanaSection />
 
       {/* Integrations Section */}
       <CarouselSection />

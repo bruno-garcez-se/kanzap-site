@@ -51,13 +51,8 @@ export default function Header() {
           </div>
           <div className="hidden md:flex items-center space-x-4">
             <Link
-              href="https://app.kanzap.com.br/#/signup"
-              className="bg-[#eb594c] text-white px-6 py-2 rounded-full hover:bg-transparent hover:text-[#eb594c] hover:border-[#eb594c] hover:border-2 transition-all duration-300"
-            >
-              Teste Grátis
-            </Link>
-            <Link
               href="https://app.kanzap.com.br/#/login"
+              target="_blank"
               className="bg-[#213365] text-white px-6 py-2 rounded-full hover:bg-transparent hover:text-[#213365] hover:border-[#213365] hover:border-2 transition-all duration-300"
             >
               Entrar
@@ -120,14 +115,8 @@ export default function Header() {
                 Contato
               </Link>
               <Link
-                href="https://app.kanzap.com.br/#/signup"
-                className="block bg-[#eb594c] text-white px-6 py-2 rounded-full hover:bg-transparent hover:text-[#eb594c] hover:border-[#eb594c] hover:border-2 transition-all duration-300"
-                onClick={() => setIsOpen(false)}
-              >
-                Teste Grátis
-              </Link>
-              <Link
                 href="https://app.kanzap.com.br/#/login"
+                target="_blank"
                 className="block bg-[#213365] text-white px-6 py-2 rounded-full hover:bg-transparent hover:text-[#213365] hover:border-[#213365] hover:border-2 transition-all duration-300 text-center"
                 onClick={() => setIsOpen(false)}
               >
