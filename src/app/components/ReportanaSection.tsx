@@ -1,11 +1,39 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function ReportanaSection() {
   const [selectedTool, setSelectedTool] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const autoPlayRef = useRef<NodeJS.Timeout>()
+
+  // Função para avançar para o próximo ícone
+  const nextTool = () => {
+    setSelectedTool((prev) => (prev + 1) % tools.length)
+  }
+
+  // Efeito para controlar o auto-play
+  useEffect(() => {
+    if (isAutoPlaying) {
+      autoPlayRef.current = setInterval(nextTool, 5000)
+    }
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+      }
+    }
+  }, [isAutoPlaying])
+
+  // Função para parar o auto-play quando o usuário interagir
+  const handleInteraction = () => {
+    setIsAutoPlaying(false)
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current)
+    }
+  }
 
   const tools = [
     {
@@ -101,7 +129,7 @@ export default function ReportanaSection() {
   ]
 
   return (
-    <section id="recursos" className="py-20 bg-white">
+    <section id="recursos" className="py-20 bg-white" onClick={handleInteraction}>
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#213365]">
@@ -118,7 +146,10 @@ export default function ReportanaSection() {
               <div
                 key={index}
                 className={`flex-shrink-0 flex flex-col items-center text-center cursor-pointer group ${selectedTool === index ? 'scale-110' : ''}`}
-                onClick={() => setSelectedTool(index)}
+                onClick={() => {
+                  handleInteraction()
+                  setSelectedTool(index)
+                }}
               >
                 <div className={`w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mb-2 transition-all duration-300 ${selectedTool === index ? 'text-[#eb594c]' : 'text-[#213365] group-hover:bg-[#eb594c] group-hover:text-white'}`}>
                   {React.cloneElement(tool.icon, { className: 'w-5 h-5' })}

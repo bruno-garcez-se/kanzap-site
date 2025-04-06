@@ -12,8 +12,8 @@ export default function FAQSection() {
 
   const faqs: FAQItem[] = [
     {
-      question: 'Como funciona o período de teste gratuito?',
-      answer: 'Oferecemos um período de teste gratuito para que você possa experimentar todas as funcionalidades da plataforma. Durante este período, você terá acesso completo a todos os recursos e poderá avaliar como o Kanzap pode ajudar seu negócio.'
+      question: 'Como posso começar a usar o Kanzap?',
+      answer: 'É muito simples! Basta entrar em contato conosco pelo WhatsApp ou preencher o formulário de solicitação de proposta. Nossa equipe irá entender suas necessidades e criar um plano personalizado para sua empresa.'
     },
     {
       question: 'Preciso instalar algum software adicional?',
